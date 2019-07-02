@@ -1,5 +1,6 @@
 package gradle_exam;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -43,7 +44,8 @@ public class EmployeeDaoTest {
 	@Test
 	public void test02InsertEmployee() throws SQLException {
 		log.trace("test02InsertEmployee()");
-		Employee newEmp = new Employee(1004, "김우빈", new Title(3), new Employee(4377), 3500000, new Department(2));
+		Date hire_date = null;
+		Employee newEmp = new Employee(1004, "김우빈", new Title(3), new Employee(3011), 1, 2000000, new Department(3), hire_date);
 		
 		int res = dao.insertEmployee(newEmp);
 		Assert.assertNotEquals(-1, res);
@@ -52,7 +54,8 @@ public class EmployeeDaoTest {
 	@Test
 	public void test03UpdateEmployee() throws SQLException {
 		log.trace("test03UpdateEmployee()");
-		Employee upEmp = new Employee(1004, "김우비이이이인", new Title(3), new Employee(4377), 3000000, new Department(2));
+		Date hire_date = null;
+		Employee upEmp = new Employee(1004, "김우비이이이인", new Title(3), new Employee(4377), 1, 3000000, new Department(2), hire_date);
 		
 		int res = dao.updateEmployee(upEmp);
 		Assert.assertNotEquals(-1, res);

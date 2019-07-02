@@ -21,7 +21,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	
 	@Override
 	public List<Employee> selectEmployeeByAll() throws SQLException {
-		String sql = "select empno, empname, title, manager, salary, dno from employee";
+		String sql = "select empno, empname, title, manager, salary, gender, dno, hire_date from employee";
 		List<Employee> lists = null;
 		
 		try(Connection conn = ConnectionProvider.getConnection();
@@ -39,12 +39,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	private Employee getEmployee(ResultSet rs) throws SQLException {
-		return new Employee(rs.getInt("empno"), rs.getString("empname"), new Title(rs.getInt("title")), new Employee(rs.getInt("manager")), rs.getInt("salary"), new Department(rs.getInt("dno")));
-	}
+		return new Employee(rs.getInt("empno"), rs.getString("empname"), new Title(rs.getInt("title")), new Employee(rs.getInt("manager")), rs.getInt("salary"), rs.getInt("gender"), new Department(rs.getInt("dno")), rs.getDate("hire_date"));
+	} 
 
 	@Override
 	public int insertEmployee(Employee employee) throws SQLException {
-		String sql = "insert into employee values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into employee values(?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try(Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -53,7 +53,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setInt(3, employee.getTitle().getTitleNo());
 			pstmt.setInt(4, employee.getManager().getEmpNo());
 			pstmt.setInt(5, employee.getSalary());
-			pstmt.setInt(6, employee.getDno().getDeptNo());
+			pstmt.setInt(6, employee.getGender());
+			pstmt.setInt(7, employee.getDno().getDeptNo());
+			pstmt.setDate(8, employee.getHire_date());
 			
 			log.trace(pstmt);
 			return pstmt.executeUpdate();
@@ -62,7 +64,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int updateEmployee(Employee employee) throws SQLException {
-		String sql = "update employee set empname=?, title=?, manager=?, salary=?, dno=? where empno=?";
+		String sql = "update employee set empname=?, title=?, manager=?, salary=?, gender=?, dno=?, hire_date=? where empno=?";
 		
 		try(Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -70,8 +72,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setInt(2, employee.getTitle().getTitleNo());
 			pstmt.setInt(3, employee.getManager().getEmpNo());
 			pstmt.setInt(4, employee.getSalary());
-			pstmt.setInt(5, employee.getDno().getDeptNo());
-			pstmt.setInt(6, employee.getEmpNo());
+			pstmt.setInt(5, employee.getGender());
+			pstmt.setInt(6, employee.getDno().getDeptNo());
+			pstmt.setDate(7, employee.getHire_date());
+			pstmt.setInt(8, employee.getEmpNo());
 			
 			log.trace(pstmt);
 			return pstmt.executeUpdate();

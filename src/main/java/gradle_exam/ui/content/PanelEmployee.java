@@ -7,11 +7,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import gradle_exam.dto.Department;
+import gradle_exam.dto.Employee;
 import gradle_exam.dto.Title;
 
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JSpinner;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class PanelEmployee extends JPanel {
@@ -19,78 +22,91 @@ public class PanelEmployee extends JPanel {
 	private JTextField tfEmpName;
 	private JComboBox<Title> cmbTitle;
 	private JComboBox<Department> cmbDept;
-	private JTextField tfSalary;
 	private JTextField tfDate;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JSpinner spSalary;
+	private JRadioButton man;
+	private JRadioButton woman;
 
 	public PanelEmployee() {
-
 		initComponents();
 	}
+	
 	private void initComponents() {
-		setLayout(new GridLayout(0, 2, 10, 5));
+		setLayout(new BorderLayout(0, 0));
+		
+		JPanel pEmp = new JPanel();
+		add(pEmp);
+		pEmp.setLayout(new GridLayout(0, 2, 10, 5));
 		
 		JLabel lblEmpNo = new JLabel("번호");
+		pEmp.add(lblEmpNo);
 		lblEmpNo.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblEmpNo);
 		
 		tfEmpNo = new JTextField();
-		add(tfEmpNo);
+		pEmp.add(tfEmpNo);
 		tfEmpNo.setColumns(10);
 		
 		JLabel lblEmpName = new JLabel("사원명");
+		pEmp.add(lblEmpName);
 		lblEmpName.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblEmpName);
 		
 		tfEmpName = new JTextField();
+		pEmp.add(tfEmpName);
 		tfEmpName.setColumns(10);
-		add(tfEmpName);
 		
 		JLabel lblTitle = new JLabel("직책");
+		pEmp.add(lblTitle);
 		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblTitle);
 		
 		cmbTitle = new JComboBox<Title>();
-		add(cmbTitle);
+		pEmp.add(cmbTitle);
 		
 		JLabel lblSalary = new JLabel("급여");
+		pEmp.add(lblSalary);
 		lblSalary.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblSalary);
 		
-		tfSalary = new JTextField();
-		tfSalary.setColumns(10);
-		add(tfSalary);
+		spSalary = new JSpinner();
+		pEmp.add(spSalary);
 		
 		JLabel lblGender = new JLabel("성별");
+		pEmp.add(lblGender);
 		lblGender.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblGender);
 		
-		JPanel panel = new JPanel();
-		add(panel);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel pgender = new JPanel();
+		pEmp.add(pgender);
+		pgender.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JRadioButton man = new JRadioButton("남");
+		man = new JRadioButton("남");
 		buttonGroup.add(man);
-		panel.add(man);
+		pgender.add(man);
 		
-		JRadioButton woman = new JRadioButton("여");
+		woman = new JRadioButton("여");
 		buttonGroup.add(woman);
-		panel.add(woman);
+		pgender.add(woman);
 		
 		JLabel lblDept = new JLabel("부서");
+		pEmp.add(lblDept);
 		lblDept.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblDept);
 		
 		cmbDept = new JComboBox<Department>();
-		add(cmbDept);
+		pEmp.add(cmbDept);
 		
 		JLabel lblDate = new JLabel("입사일");
+		pEmp.add(lblDate);
 		lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lblDate);
 		
 		tfDate = new JTextField();
+		pEmp.add(tfDate);
 		tfDate.setColumns(10);
-		add(tfDate);
 	}
-
+	
+	public void setEmployee(Employee employee) {
+		tfEmpNo.setText(employee.getEmpNo()+"");
+		tfEmpName.setText(employee.getEmpName());
+		cmbTitle.setSelectedItem(employee.getTitle());
+		
+		cmbDept.setSelectedItem(employee.getDno());
+		
+	}
 }

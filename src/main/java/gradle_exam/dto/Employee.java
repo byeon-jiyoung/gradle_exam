@@ -1,12 +1,16 @@
 package gradle_exam.dto;
 
+import java.sql.Date;
+
 public class Employee {
 	private int empNo;
 	private String empName;
 	private Title title;
 	private Employee manager;
+	private int gender;
 	private int salary;
 	private Department dno;
+	private Date hire_date;
 	
 	public Employee() {
 	}
@@ -15,13 +19,16 @@ public class Employee {
 		this.empNo = empNo;
 	}
 
-	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dno) {
+	public Employee(int empNo, String empName, Title title, Employee manager, int gender, int salary, Department dno,
+			Date hire_date) {
 		this.empNo = empNo;
 		this.empName = empName;
 		this.title = title;
 		this.manager = manager;
+		this.gender = gender;
 		this.salary = salary;
 		this.dno = dno;
+		this.hire_date = hire_date;
 	}
 
 	public int getEmpNo() {
@@ -56,6 +63,14 @@ public class Employee {
 		this.manager = manager;
 	}
 
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
 	public int getSalary() {
 		return salary;
 	}
@@ -72,10 +87,19 @@ public class Employee {
 		this.dno = dno;
 	}
 
+	public Date getHire_date() {
+		return hire_date;
+	}
+
+	public void setHire_date(Date hire_date) {
+		this.hire_date = hire_date;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("Employee [empNo=%s, empName=%s, title=%s, manager=%s, salary=%s, dno=%s]", empNo, empName,
-				title, manager, salary, dno);
+		return String.format(
+				"Employee [empNo=%s, empName=%s, title=%s, manager=%s, gender=%s, salary=%s, dno=%s, hire_date=%s]",
+				empNo, empName, title, manager, gender, salary, dno, hire_date);
 	}
 	
 }
