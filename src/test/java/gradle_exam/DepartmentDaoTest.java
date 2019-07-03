@@ -1,7 +1,5 @@
 package gradle_exam;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
 import java.util.List;
 
