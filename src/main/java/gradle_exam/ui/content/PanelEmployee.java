@@ -2,8 +2,14 @@ package gradle_exam.ui.content;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.sql.Date;
+import java.util.List;
+import java.util.Vector;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import gradle_exam.dto.Department;
@@ -13,6 +19,7 @@ import gradle_exam.dto.Title;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import java.awt.BorderLayout;
 
@@ -27,7 +34,12 @@ public class PanelEmployee extends JPanel {
 	private JSpinner spSalary;
 	private JRadioButton man;
 	private JRadioButton woman;
-
+	
+	private DefaultComboBoxModel<Title> titleCmbModel;
+	private DefaultComboBoxModel<Department> deptCmbModel;
+	
+	private SpinnerModel numberModel = new SpinnerNumberModel(1500000, 1000000, 5000000, 100000);
+	
 	public PanelEmployee() {
 		initComponents();
 	}
@@ -66,7 +78,7 @@ public class PanelEmployee extends JPanel {
 		pEmp.add(lblSalary);
 		lblSalary.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		spSalary = new JSpinner();
+		spSalary = new JSpinner(numberModel);
 		pEmp.add(spSalary);
 		
 		JLabel lblGender = new JLabel("성별");
@@ -77,7 +89,7 @@ public class PanelEmployee extends JPanel {
 		pEmp.add(pgender);
 		pgender.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		man = new JRadioButton("남");
+		man = new JRadioButton("남", true);
 		buttonGroup.add(man);
 		pgender.add(man);
 		
@@ -103,10 +115,26 @@ public class PanelEmployee extends JPanel {
 	
 	public void setEmployee(Employee employee) {
 		tfEmpNo.setText(employee.getEmpNo()+"");
+		tfEmpNo.setEnabled(false);
 		tfEmpName.setText(employee.getEmpName());
 		cmbTitle.setSelectedItem(employee.getTitle());
-		
-		cmbDept.setSelectedItem(employee.getDno());
-		
+	}
+	
+	public void setDeptCmbModel(List<Department> deptList) {
+		deptCmbModel = new DefaultComboBoxModel<Department>(new Vector<Department>(deptList));
+		cmbDept.setModel(deptCmbModel);
+	}
+	
+	public JComboBox<Department> getCmbDept() {
+		return cmbDept;
+	}
+	
+	public void setTitleCmbModel(List<Title> titleList) {
+		titleCmbModel = new DefaultComboBoxModel<Title>(new Vector<Title>(titleList));
+		cmbTitle.setModel(titleCmbModel);
+	}
+	
+	public JComboBox<Title> getCmbManager() {
+		return cmbTitle;
 	}
 }

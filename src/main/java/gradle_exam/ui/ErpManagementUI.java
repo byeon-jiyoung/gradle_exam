@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gradle_exam.dao.DepartmentDao;
+import gradle_exam.dto.Department;
+import gradle_exam.ui.content.PanelDepartment;
 
 @SuppressWarnings("serial")
 public class ErpManagementUI extends JFrame implements ActionListener {
@@ -22,7 +25,8 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 	private JButton btnTitle;
 	
 	private DepartmentUI frameDept;
-	private DepartmentDao deptDao;
+	private TitleUI frameTitle;
+	private EmployeeUI frameEmp;
 	
 	public ErpManagementUI() {
 		initComponents();
@@ -35,9 +39,10 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 3, 0, 0));
+		contentPane.setLayout(new GridLayout(0, 3, 10, 0));
 		
 		btnEmp = new JButton("사원관리");
+		btnEmp.addActionListener(this);
 		contentPane.add(btnEmp);
 		
 		btnDept = new JButton("부서관리");
@@ -45,11 +50,18 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		contentPane.add(btnDept);
 		
 		btnTitle = new JButton("직책관리");
+		btnTitle.addActionListener(this);
 		contentPane.add(btnTitle);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEmp) {
+			actionPerformedBtnEmp(e);
+		}
 		try {
+			if (e.getSource() == btnTitle) {
+				actionPerformedBtnTitle(e);
+			}
 			if (e.getSource() == btnDept) {
 				actionPerformedBtnDept(e);
 			}
@@ -63,5 +75,19 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 			frameDept = new DepartmentUI();
 		}
 		frameDept.setVisible(true);
+	}
+	
+	protected void actionPerformedBtnTitle(ActionEvent e) throws SQLException {
+		if(frameTitle == null) {
+			frameTitle = new TitleUI();
+		}
+		frameTitle.setVisible(true);
+	}
+	
+	protected void actionPerformedBtnEmp(ActionEvent e) {
+		if(frameEmp == null) {
+			frameEmp = new EmployeeUI();
+		}
+		frameEmp.setVisible(true);
 	}
 }

@@ -113,6 +113,7 @@ public class DepartmentUI extends JFrame implements ActionListener {
 
 	protected void actionPerformedBtnCancel(ActionEvent e) throws SQLException {
 		pDept.setDepartment(dao.selectDepartmentByAll()); //텍스트 세팅
+		btnAdd.setText("추가");
 	}
 	
 	protected void actionPerformedBtnAdd(ActionEvent e) {
@@ -147,7 +148,8 @@ public class DepartmentUI extends JFrame implements ActionListener {
 		
 		try {
 			res = dao.deleteDepartment(searchDept);
-			JOptionPane.showMessageDialog(null, "삭제완료");
+			JOptionPane.showMessageDialog(null, String.format("%s 부서가 삭제되었습니다.", searchDept.getDeptName()));
+			btnAdd.setText("추가");
 			refresh();
 		} catch (SQLException e) {
 			e.printStackTrace();

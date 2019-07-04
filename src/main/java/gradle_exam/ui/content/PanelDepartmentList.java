@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import gradle_exam.dao.DepartmentDao;
 import gradle_exam.dto.Department;
 import gradle_exam.ui.DepartmentUI;
 
@@ -31,7 +30,6 @@ public class PanelDepartmentList extends JPanel implements ActionListener {
 	private JMenuItem mntmPopUpdate;
 	private JMenuItem mntmPopDelete;
 	
-	private DepartmentDao dao;
 	private DepartmentUI parent;
 	
 	public void setDeptList(List<Department> deptList) {

@@ -7,8 +7,8 @@ public class Employee {
 	private String empName;
 	private Title title;
 	private Employee manager;
-	private int gender;
 	private int salary;
+	private int gender;
 	private Department dno;
 	private Date hire_date;
 	
@@ -19,7 +19,7 @@ public class Employee {
 		this.empNo = empNo;
 	}
 
-	public Employee(int empNo, String empName, Title title, Employee manager, int gender, int salary, Department dno,
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, int gender, Department dno,
 			Date hire_date) {
 		this.empNo = empNo;
 		this.empName = empName;
@@ -98,8 +98,12 @@ public class Employee {
 	@Override
 	public String toString() {
 		return String.format(
-				"Employee [empNo=%s, empName=%s, title=%s, manager=%s, gender=%s, salary=%s, dno=%s, hire_date=%s]",
-				empNo, empName, title, manager, gender, salary, dno, hire_date);
+				"Employee [empNo=%s, empName=%s, title=%s, gender=%s, salary=%s, dno=%s, hire_date=%s]",
+				empNo, empName, title, gender, salary, dno, hire_date);
+	}
+
+	public Object[] toArray() {
+		return new Object[] {empNo, empName, title, String.format("%,d", salary), gender==0?"여자":"남자", dno, hire_date} ;
 	}
 	
 }
