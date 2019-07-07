@@ -77,11 +77,12 @@ public class EmployeeUI extends JFrame implements ActionListener {
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
 		pEmp = new PanelEmployee();
-		pEmp.setTfEmpNo(String.valueOf(empList.size()+1));
-		contentPane.add(pEmp);
-		
+		pEmp.setEmpList(empList);
 		pEmp.setDeptCmbModel(deptList);
 		pEmp.setTitleCmbModel(titleList);
+		
+		pEmp.setTfEmpNo();
+		contentPane.add(pEmp);
 		
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn);
@@ -120,7 +121,7 @@ public class EmployeeUI extends JFrame implements ActionListener {
 			pEmpList.reloadData();
 			
 			empList = empdao.selectEmployeeByAll();
-			pEmp.setTfEmpNo(String.valueOf(empList.size()+1));
+			pEmp.setTfEmpNo();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,14 +155,14 @@ public class EmployeeUI extends JFrame implements ActionListener {
 		pEmpList.reloadData();
 		
 		empList = empdao.selectEmployeeByAll();
-		pEmp.setTfEmpNo(String.valueOf(empList.size()+1));
+		pEmp.setTfEmpNo();
 		
 		btnAdd.setText("추가");
 	}
 
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pEmp.clearEmp();
-		pEmp.setTfEmpNo(String.valueOf(empList.size()+1));
+		pEmp.setTfEmpNo();
 	}
 	
 	protected void actionPerformedBtnAdd(ActionEvent e) throws Exception {
@@ -176,7 +177,8 @@ public class EmployeeUI extends JFrame implements ActionListener {
 			pEmpList.reloadData();
 			
 			empList = empdao.selectEmployeeByAll();
-			pEmp.setTfEmpNo(String.valueOf(empList.size()+1));
+			pEmp.setTfEmpNo();
+			//JOptionPane.showMessageDialog(null,empList+"frame");
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
@@ -184,5 +186,6 @@ public class EmployeeUI extends JFrame implements ActionListener {
 	
 	public void clearPanelEmployee() {
 		pEmp.clearEmp();
+		pEmp.setTfEmpNo();
 	}
 }

@@ -49,7 +49,7 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return String.format("%s(%s층)", deptName, deptNo);
+		return String.format("%s(%d층)", deptName, floor);
 	}
 
 	public Object[] toArray() {

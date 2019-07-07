@@ -45,7 +45,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	private Employee getEmployee(ResultSet rs) throws SQLException {
-		return new Employee(rs.getInt("empno"), rs.getString("empname"), new Title(rs.getInt("tno"),rs.getString("tname")), new Employee(rs.getInt("manager")), rs.getInt("salary"), rs.getInt("gender"), new Department(rs.getInt("depno"),rs.getString("deptname")), rs.getDate("hire_date"));
+		return new Employee(rs.getInt("empno"), rs.getString("empname"), new Title(rs.getInt("tno"),rs.getString("tname")), new Employee(rs.getInt("manager")), rs.getInt("salary"), rs.getInt("gender"), new Department(rs.getInt("depno"),rs.getString("deptname"),rs.getInt("floor")), rs.getDate("hire_date"));
 	} 
 
 	@Override

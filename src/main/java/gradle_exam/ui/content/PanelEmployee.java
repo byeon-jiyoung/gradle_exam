@@ -2,6 +2,7 @@ package gradle_exam.ui.content;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,14 +10,18 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
+import gradle_exam.dao.EmployeeDao;
+import gradle_exam.daoImpl.EmployeeDaoImpl;
 import gradle_exam.dto.Department;
 import gradle_exam.dto.Employee;
 import gradle_exam.dto.Title;
+import gradle_exam.ui.EmployeeUI;
 
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
@@ -43,11 +48,19 @@ public class PanelEmployee extends JPanel {
 	
 	private SpinnerModel numberModel = new SpinnerNumberModel(1500000, 1000000, 5000000, 100000);
 	
+	private List<Employee> empList;
+	private EmployeeDao dao;
+	
 	Date date = new Date();
 	SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
 	String date_str = sd.format(date);
 	
+	public void setEmpList(List<Employee> empList) {
+		this.empList = empList;
+	}
+	
 	public PanelEmployee() {
+		dao = new EmployeeDaoImpl();
 		initComponents();
 	}
 	
@@ -147,15 +160,32 @@ public class PanelEmployee extends JPanel {
 		tfDate.setText(date_str);
 	}
 	
-	public void setTfEmpNo(String str) {
-		tfEmpNo.setText(str);
+	public void setTfEmpNo() {
+		SimpleDateFormat sd = new SimpleDateFormat("yy");
+		String d = sd.format(date);
+		//JOptionPane.showMessageDialog(null,empList);
+		
+		if(empList.size() == 0) {
+			tfEmpNo.setText(String.format("E0"+d+"001"));
+		}else {
+			try {
+				empList = dao.selectEmployeeByAll();
+				int empno = empList.get(empList.size()-1).getEmpNo();
+				System.out.println(empno);
+				tfEmpNo.setText(String.format("E0"+d+"%03d", empno+1));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		tfEmpNo.setEnabled(false);
 	}
 	
 	public Employee getEmp() throws Exception {
 		validCheck();
 		
-		int empno = Integer.parseInt(tfEmpNo.getText().trim());
+		//JOptionPane.showMessageDialog(null, tfEmpNo);
+		String tfempno = tfEmpNo.getText().substring(4);
+		int empno = Integer.parseInt(tfempno);
 		String empname = tfEmpName.getText().trim();
 		Title title = (Title) cmbTitle.getSelectedItem();
 		System.out.println(title);
@@ -189,14 +219,17 @@ public class PanelEmployee extends JPanel {
 	}
 
 	public void setEmp(Employee emp) {
-		tfEmpNo.setText(emp.getEmpNo()+"");
+		SimpleDateFormat sd = new SimpleDateFormat("yy");
+		String d = sd.format(date);
+		
+		tfEmpNo.setText(String.format("E0"+d+"%03d", emp.getEmpNo()));
 		tfEmpName.setText(emp.getEmpName());
 		cmbTitle.setSelectedItem(emp.getTitle());
 		spSalary.setValue(emp.getSalary());
 		cmbDept.setSelectedItem(emp.getDno());
 		tfDate.setText(String.valueOf(emp.getHire_date()));
 		
-		System.out.println(emp.getGender());
+		//System.out.println(emp.getGender());
 		
 		if(emp.getGender()==0) {
 			woman.setSelected(true);

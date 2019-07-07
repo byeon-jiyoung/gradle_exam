@@ -1,5 +1,6 @@
 package gradle_exam.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Employee {
@@ -113,7 +114,10 @@ public class Employee {
 	}
 
 	public Object[] toArray() {
-		return new Object[] {String.format("E%06d", empNo), empName, title, String.format("%,d", salary), gender==0?"여자":"남자", dno, hire_date} ;
+		Date date = new Date();
+		SimpleDateFormat sd = new SimpleDateFormat("yy");
+		String d = sd.format(date);
+		return new Object[] {String.format("E0"+d+"%03d", empNo), empName, title, String.format("%,d", salary), gender==0?"여자":"남자", dno, hire_date} ;
 	}
 	
 }

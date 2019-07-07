@@ -1,5 +1,6 @@
 package gradle_exam.ui.content;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JMenuItem;
@@ -76,9 +77,14 @@ public class PanelEmployeeList extends JPanel implements ActionListener{
 	}
 	
 	private Object[][] getRows() {
+		if(empList == null) {
+			//JOptionPane.showMessageDialog(null, "없음");
+			empList = new ArrayList<Employee>();
+		}
 		Object[][] rows = new Object[empList.size()][];
 		for (int i = 0; i < empList.size(); i++) {
 			rows[i] = empList.get(i).toArray();
+			System.out.println(empList.get(i).getDno());
 		}
 		return rows;
 	}
