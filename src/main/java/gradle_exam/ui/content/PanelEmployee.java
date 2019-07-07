@@ -171,6 +171,7 @@ public class PanelEmployee extends JPanel {
 			try {
 				empList = dao.selectEmployeeByAll();
 				//JOptionPane.showMessageDialog(null, empList.size());
+				
 				int empno = empList.get(empList.size()-1).getEmpNo();
 				System.out.println(empno);
 				tfEmpNo.setText(String.format("E0"+d+"%03d", empno+1));
