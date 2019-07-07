@@ -1,6 +1,6 @@
 package gradle_exam.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Employee {
 	private int empNo;
@@ -17,6 +17,16 @@ public class Employee {
 
 	public Employee(int empNo) {
 		this.empNo = empNo;
+	}
+	
+	public Employee(int empNo, String empName, Title title, int salary, int gender, Department dno, Date hire_date) {
+		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.salary = salary;
+		this.gender = gender;
+		this.dno = dno;
+		this.hire_date = hire_date;
 	}
 
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, int gender, Department dno,
@@ -103,7 +113,7 @@ public class Employee {
 	}
 
 	public Object[] toArray() {
-		return new Object[] {empNo, empName, title, String.format("%,d", salary), gender==0?"여자":"남자", dno, hire_date} ;
+		return new Object[] {String.format("E%06d", empNo), empName, title, String.format("%,d", salary), gender==0?"여자":"남자", dno, hire_date} ;
 	}
 	
 }

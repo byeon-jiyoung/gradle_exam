@@ -31,6 +31,7 @@ public class PanelEmployeeList extends JPanel implements ActionListener{
 	private JMenuItem mntmPopDelete;
 	
 	private EmployeeUI parent;
+	
 	public void setEmpList(List<Employee> empList) {
 		this.empList = empList;
 	}

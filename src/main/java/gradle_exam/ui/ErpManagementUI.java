@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import gradle_exam.dao.DepartmentDao;
 import gradle_exam.dto.Department;
 import gradle_exam.ui.content.PanelDepartment;
+import gradle_exam.ui.content.PanelTitle;
 
 @SuppressWarnings("serial")
 public class ErpManagementUI extends JFrame implements ActionListener {
@@ -27,6 +28,7 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 	private DepartmentUI frameDept;
 	private TitleUI frameTitle;
 	private EmployeeUI frameEmp;
+	
 	
 	public ErpManagementUI() {
 		initComponents();
@@ -74,6 +76,7 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		if(frameDept == null) {
 			frameDept = new DepartmentUI();
 		}
+		frameDept.setClear();
 		frameDept.setVisible(true);
 	}
 	
@@ -81,6 +84,7 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		if(frameTitle == null) {
 			frameTitle = new TitleUI();
 		}
+		frameTitle.setClear();
 		frameTitle.setVisible(true);
 	}
 	
@@ -88,6 +92,7 @@ public class ErpManagementUI extends JFrame implements ActionListener {
 		if(frameEmp == null) {
 			frameEmp = new EmployeeUI();
 		}
+		frameEmp.clearPanelEmployee();
 		frameEmp.setVisible(true);
 	}
 }

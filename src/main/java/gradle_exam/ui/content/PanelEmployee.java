@@ -2,7 +2,9 @@ package gradle_exam.ui.content;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -22,6 +24,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class PanelEmployee extends JPanel {
@@ -39,6 +42,10 @@ public class PanelEmployee extends JPanel {
 	private DefaultComboBoxModel<Department> deptCmbModel;
 	
 	private SpinnerModel numberModel = new SpinnerNumberModel(1500000, 1000000, 5000000, 100000);
+	
+	Date date = new Date();
+	SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+	String date_str = sd.format(date);
 	
 	public PanelEmployee() {
 		initComponents();
@@ -87,7 +94,7 @@ public class PanelEmployee extends JPanel {
 		
 		JPanel pgender = new JPanel();
 		pEmp.add(pgender);
-		pgender.setLayout(new GridLayout(0, 2, 0, 0));
+		pgender.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		man = new JRadioButton("남", true);
 		buttonGroup.add(man);
@@ -113,13 +120,6 @@ public class PanelEmployee extends JPanel {
 		tfDate.setColumns(10);
 	}
 	
-	public void setEmployee(Employee employee) {
-		tfEmpNo.setText(employee.getEmpNo()+"");
-		tfEmpNo.setEnabled(false);
-		tfEmpName.setText(employee.getEmpName());
-		cmbTitle.setSelectedItem(employee.getTitle());
-	}
-	
 	public void setDeptCmbModel(List<Department> deptList) {
 		deptCmbModel = new DefaultComboBoxModel<Department>(new Vector<Department>(deptList));
 		cmbDept.setModel(deptCmbModel);
@@ -136,5 +136,72 @@ public class PanelEmployee extends JPanel {
 	
 	public JComboBox<Title> getCmbManager() {
 		return cmbTitle;
+	}
+	
+	public void clearEmp() {
+		tfEmpName.setText("");
+		cmbTitle.setSelectedIndex(-1);
+		spSalary.setValue(1500000);
+		man.setSelected(true);
+		cmbDept.setSelectedIndex(-1);
+		tfDate.setText(date_str);
+	}
+	
+	public void setTfEmpNo(String str) {
+		tfEmpNo.setText(str);
+		tfEmpNo.setEnabled(false);
+	}
+	
+	public Employee getEmp() throws Exception {
+		validCheck();
+		
+		int empno = Integer.parseInt(tfEmpNo.getText().trim());
+		String empname = tfEmpName.getText().trim();
+		Title title = (Title) cmbTitle.getSelectedItem();
+		System.out.println(title);
+		int salary = (int) spSalary.getValue();
+		int gender = man.isSelected()?1:0;
+		Department dept = (Department) cmbDept.getSelectedItem();
+		Date date = null;
+		try {
+			date = sd.parse(tfDate.getText().trim());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return new Employee(empno, empname, title, salary, gender, dept, date);
+	}
+
+	private void validCheck() throws Exception {
+		if (tfEmpName.getText().equals("")) {
+			throw new Exception("이름이 비었습니다");
+		}
+		if(cmbTitle.getSelectedItem() == null) {
+			throw new Exception("직책을 선택하세요.");
+		}
+		if(cmbDept.getSelectedItem() == null) {
+			throw new Exception("부서를 선택하세요.");
+		}
+		try {
+			date = sd.parse(tfDate.getText().trim());
+		} catch (ParseException e) {
+			throw new Exception("날짜가 비었습니다.");
+		}
+	}
+
+	public void setEmp(Employee emp) {
+		tfEmpNo.setText(emp.getEmpNo()+"");
+		tfEmpName.setText(emp.getEmpName());
+		cmbTitle.setSelectedItem(emp.getTitle());
+		spSalary.setValue(emp.getSalary());
+		cmbDept.setSelectedItem(emp.getDno());
+		tfDate.setText(String.valueOf(emp.getHire_date()));
+		
+		System.out.println(emp.getGender());
+		
+		if(emp.getGender()==0) {
+			woman.setSelected(true);
+		}else {
+			man.setSelected(true);
+		}
 	}
 }

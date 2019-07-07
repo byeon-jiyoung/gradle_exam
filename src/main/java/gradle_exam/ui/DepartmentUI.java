@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gradle_exam.dao.DepartmentDao;
-import gradle_exam.daoImpl.DepartmentDapImpl;
+import gradle_exam.daoImpl.DepartmentDaoImpl;
 import gradle_exam.dto.Department;
 import gradle_exam.ui.content.PanelDepartment;
 import gradle_exam.ui.content.PanelDepartmentList;
@@ -40,7 +40,7 @@ public class DepartmentUI extends JFrame implements ActionListener {
 	}
 
 	public DepartmentUI() {
-		dao = new DepartmentDapImpl();
+		dao = new DepartmentDaoImpl();
 		try {
 			deptList = dao.selectDepartmentByAll();
 		} catch (SQLException e) {
@@ -154,5 +154,10 @@ public class DepartmentUI extends JFrame implements ActionListener {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setClear() {
+		pDept.setDepartment(deptList);
+		btnAdd.setText("추가");
 	}
 }

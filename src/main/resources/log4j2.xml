@@ -9,7 +9,7 @@
       <RollingFile name="RollingFile_Daily">
          <FileName>./logs/jdbc_study_daily_log</FileName>
          <FilePattern>./logs/time-based-logs/%d{yyyy-MM-dd}.log</FilePattern>
-         <PatternLayout pattern="[%-5level] [%d{yyyy-MM-dd HH:mm:ss a}] %m%n" />
+         <PatternLayout pattern="[%-5level] [%d{yyyy-MM-dd HH}] %m%n" />
          <Policies>
             <TimeBasedTriggeringPolicy interval="1" modulate="true" />
          </Policies>
@@ -19,7 +19,7 @@
    </Appenders>
    
    <Loggers>
-      <Logger name="gradle_jdbc_study" level="trace" additivity="false">
+      <Logger name="gradle_exam" level="trace" additivity="false">
          <AppenderRef ref="Console" />
          <AppenderRef ref="RollingFile_Daily" />
       </Logger>

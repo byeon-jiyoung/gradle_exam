@@ -134,4 +134,9 @@ public class TitleUI extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setClear() {
+		pTitle.setTitle(titleList);
+		btnAdd.setText("추가");
+	}
 }

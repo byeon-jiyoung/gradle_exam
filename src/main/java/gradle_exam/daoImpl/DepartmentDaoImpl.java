@@ -11,7 +11,7 @@ import gradle_exam.dao.DepartmentDao;
 import gradle_exam.dto.Department;
 import gradle_exam.jdbc.ConnectionProvider;
 
-public class DepartmentDapImpl implements DepartmentDao {
+public class DepartmentDaoImpl implements DepartmentDao {
 	
 	@Override
 	public List<Department> selectDepartmentByAll() throws SQLException {

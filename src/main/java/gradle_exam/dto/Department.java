@@ -11,6 +11,11 @@ public class Department {
 	public Department(int deptNo) {
 		this.deptNo = deptNo;
 	}
+	
+	public Department(int deptNo, String deptName) {
+		this.deptNo = deptNo;
+		this.deptName = deptName;
+	}
 
 	public Department(int deptNo, String deptName, int floor) {
 		this.deptNo = deptNo;
@@ -51,7 +56,6 @@ public class Department {
 		return new Object[] {String.format("D%03d", deptNo), deptName, floor};
 	}
 
-	/*
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,5 +77,5 @@ public class Department {
 			return false;
 		return true;
 	}
-	*/
+	
 }

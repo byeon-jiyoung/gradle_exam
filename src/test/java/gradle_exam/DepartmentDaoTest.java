@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import gradle_exam.dao.DepartmentDao;
-import gradle_exam.daoImpl.DepartmentDapImpl;
+import gradle_exam.daoImpl.DepartmentDaoImpl;
 import gradle_exam.dto.Department;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -23,7 +23,7 @@ public class DepartmentDaoTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		dao = new DepartmentDapImpl();
+		dao = new DepartmentDaoImpl();
 	}
 
 	@AfterClass
