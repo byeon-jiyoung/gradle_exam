@@ -118,7 +118,7 @@ public class PanelDepartmentList extends JPanel implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-	}
+	} 
 
 	private void updateDeptUI() {
 		int i = table.getSelectedRow();

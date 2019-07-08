@@ -170,6 +170,7 @@ public class PanelEmployee extends JPanel {
 			
 			if(empList == null) {
 				tfEmpNo.setText(String.format("E0"+d+"001"));
+				System.out.println(empList.size());
 			}else {
 				int empno = empList.get(empList.size()-1).getEmpNo();
 				System.out.println(empno);

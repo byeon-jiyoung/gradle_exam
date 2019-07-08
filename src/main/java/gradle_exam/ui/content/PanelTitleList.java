@@ -79,7 +79,7 @@ public class PanelTitleList extends JPanel implements ActionListener {
 		for (int i = 0; i < titleList.size(); i++) {
 			rows[i] = titleList.get(i).toArray();
 		}
-		return rows;
+		return rows; 
 	}
 
 	private String[] getColumnNames() {
