@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -21,7 +20,6 @@ import gradle_exam.daoImpl.EmployeeDaoImpl;
 import gradle_exam.dto.Department;
 import gradle_exam.dto.Employee;
 import gradle_exam.dto.Title;
-import gradle_exam.ui.EmployeeUI;
 
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
