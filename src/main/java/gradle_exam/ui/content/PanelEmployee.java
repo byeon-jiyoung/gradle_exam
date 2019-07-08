@@ -165,18 +165,20 @@ public class PanelEmployee extends JPanel {
 		String d = sd.format(date);
 		//JOptionPane.showMessageDialog(null,empList);
 		
-		if(empList.size() == 0) {
-			tfEmpNo.setText(String.format("E0"+d+"001"));
-		}else {
-			try {
-				empList = dao.selectEmployeeByAll();
+		try {
+			empList = dao.selectEmployeeByAll();
+			
+			if(empList == null) {
+				tfEmpNo.setText(String.format("E0"+d+"001"));
+			}else {
 				int empno = empList.get(empList.size()-1).getEmpNo();
 				System.out.println(empno);
 				tfEmpNo.setText(String.format("E0"+d+"%03d", empno+1));
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
 		tfEmpNo.setEnabled(false);
 	}
 	

@@ -97,6 +97,7 @@ public class TitleUI extends JFrame implements ActionListener {
 		dao.updateTitle(title);
 		refresh();
 		btnAdd.setText("추가");
+		JOptionPane.showMessageDialog(null, String.format("%s 직책이 수정되었습니다.", title.getTitleName()));
 	}
 
 	public void refresh() throws SQLException {
@@ -127,7 +128,7 @@ public class TitleUI extends JFrame implements ActionListener {
 	public void deleteTitleUI(Title searchTitle) {
 		try {
 			dao.deleteTitle(searchTitle);
-			JOptionPane.showMessageDialog(null, "삭제완료");
+			JOptionPane.showMessageDialog(null, String.format("%s 직책이 삭제되었습니다.", searchTitle.getTitleName()));
 			btnAdd.setText("추가");
 			refresh();
 		} catch (SQLException e) {

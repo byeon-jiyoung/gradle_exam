@@ -122,7 +122,6 @@ public class EmployeeUI extends JFrame implements ActionListener {
 			
 			empList = empdao.selectEmployeeByAll();
 			pEmp.setTfEmpNo();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
